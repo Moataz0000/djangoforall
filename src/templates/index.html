@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Home | Django For All
+{% endblock title %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-12">
+    <div class="flex flex-col md:flex-row">
+
+        <!-- Main Content -->
+        <div class="md:w-3/4 mb-8 md:mr-8">
+
+            <!-- Hero Section -->
+            <section class="text-center py-16 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg shadow-lg animate__animated animate__fadeIn">
+                <h1 class="text-5xl font-extrabold">Welcome to Django For All!</h1>
+                <p class="mt-6 text-xl">
+                    Your one-stop resource for learning Django and building amazing web applications.
+                </p>
+                <a href="https://www.youtube.com/@djangoforall" target="_blank"
+                   class="inline-block mt-8 px-8 py-3 bg-white text-blue-600 font-semibold rounded-full shadow hover:bg-blue-600 hover:text-white transition duration-300 animate__animated animate__pulse">
+                    View My YouTube Channel
+                </a>
+            </section>
+
+            <!-- About Me Section -->
+            <section class="mt-16 bg-gray-50 p-10 rounded-xl shadow-md">
+                <h2 class="text-4xl font-extrabold text-gray-900 text-center mb-8"> Summary</h2>
+                <hr class="my-4">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2">
+                        <p class="text-xl text-gray-700 leading-relaxed">
+                            Hi, I'm Moataz Fawzy, a passionate Django developer with a love for teaching and sharing knowledge.
+                        </p>
+                        <p class="text-xl text-gray-700 mt-4 leading-relaxed">
+                             Through my YouTube channel, 'Django For All,' I provide tutorials, tips, and project-based learning to make web development easier for beginners and experienced developers alike.
+                        </p>
+                        <p class="text-xl text-gray-700 mt-4 leading-relaxed">
+                              I'm also an advocate for clean, scalable code, and I enjoy creating content that helps others grow as developers.
+                              Check out my channel for more in-depth guides on Django and web development!
+                        </p>
+                    </div>
+                    <div class="md:w-1/2 text-center md:pl-10 mt-10 md:mt-0">
+                        <img src="{% static 'images/me.jpg' %}" alt="Moataz Fawzy" class="rounded-full w-48 h-48 mx-auto shadow-lg">
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Support Section (Sidebar) -->
+        <aside class="md:w-1/4 mb-8">
+            <div class="mt-20 text-center bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 animate__animated animate__pulse">
+                   Love What I'm Doing? Help Me Keep Creating!
+                </h2>
+                <p class="text-base md:text-lg text-gray-700 mb-6 leading-relaxed max-w-xs md:max-w-sm mx-auto animate__animated animate__fadeInUp">
+                    Your support helps me continue sharing valuable knowledge, tutorials, and content with developers around the world.
+                    Even a small contribution makes a huge difference!
+                </p>
+                <div class="relative inline-block group animate__animated animate__rubberBand mb-4">
+                    <a href="https://www.buymeacoffee.com/djangoforall" target="_blank"
+                       class="inline-block px-8 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white font-bold rounded-full shadow-lg hover:bg-yellow-700 transition duration-300 ease-in-out transform group-hover:scale-110 group-hover:rotate-2">
+                        Buy Me a Coffee ☕
+                    </a>
+                    <div class="absolute -top-4 -right-8 bg-pink-500 text-white rounded-full px-4 py-2 text-xs font-semibold shadow-lg animate-bounce">
+                        <span>Support Now!</span>
+                    </div>
+                </div>
+                <p class="mt-6 text-gray-600 text-sm italic leading-snug max-w-xs mx-auto">
+                    100% of your support goes directly into creating more tutorials and better resources for you!
+                </p>
+            </div>
+
+            <!-- Social Media Links -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-md mt-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Connect with Me</h2>
+                <div class="flex justify-center space-x-4">
+                    <a href="https://www.youtube.com/@djangoforall" target="_blank" class="hover:opacity-75 transition duration-200">
+                        <img class="h-10 w-10" src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube">
+                    </a>
+                    <a href="https://www.instagram.com/mezo_5102/" target="_blank" class="hover:opacity-75 transition duration-200">
+                        <img class="h-10 w-10" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+                    </a>
+                    <a href="https://x.com/Mezo0345" target="_blank" class="hover:opacity-75 transition duration-200">
+                        <img class="h-10 w-10" src="{% static 'images/download.jpeg' %}" alt="X">
+                    </a>
+                    <a href="https://www.linkedin.com/in/moataz-fawzy-backend/" target="_blank" class="hover:opacity-75 transition duration-200">
+                        <img class="h-10 w-10" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
+                    </a>
+                    <a href="https://github.com/Moataz0000" target="_blank" class="hover:opacity-75 transition duration-200">
+                        <img class="h-10 w-10" src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub">
+                    </a>
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+
+{% endblock content %}

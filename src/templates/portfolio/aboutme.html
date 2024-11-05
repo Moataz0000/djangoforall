@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    About Me | Django for All
+{% endblock title %}
+
+{% block content %}
+<div class="bg-gray-50 py-20 px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <!-- Profile Section -->
+    <div class="flex flex-col items-center text-center">
+      <img class="h-40 w-40 rounded-full shadow-lg mb-6" src="{% static 'images/me.jpg' %}" alt="Profile Picture">
+      <h1 class="text-5xl font-bold text-gray-900">Moataz Fawzy</h1>
+      <p class="mt-4 text-lg leading-6 text-gray-600 max-w-3xl">I’m a web developer specialized in Django, PostgreSQL, and Tailwind CSS, creating efficient, scalable web applications and sharing my knowledge with the world.</p>
+    </div>
+
+<!-- About Me Section -->
+<div class="mt-16 bg-gray-50 p-10 rounded-xl shadow-md">
+  <h2 class="text-4xl font-extrabold text-gray-900 text-center mb-8 animate__animated animate__fadeIn">About-Me</h2>
+  <hr><br>
+  <div class="flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 animate__animated animate__fadeInLeft">
+          <p class="text-xl text-gray-700 leading-relaxed">
+              Hi, I'm Moataz Fawzy, a passionate Django developer with a love for teaching and sharing knowledge.
+              Over the years, I've built numerous web applications using Django, and now I want to help others do
+              the same.
+          </p>
+          <p class="text-xl text-gray-700 mt-4 leading-relaxed">
+              Through my YouTube channel, <strong>"Django For All"</strong>, I provide tutorials, tips, and
+              project-based learning to make web development easier for beginners and experienced developers
+              alike. Whether you're just starting out or looking to enhance your skills, you'll find valuable
+              resources here.
+          </p>
+          <p class="text-xl text-gray-700 mt-4 leading-relaxed">
+              I'm also an advocate for clean, scalable code, and I enjoy creating content that helps others grow
+              as developers. Check out my channel for more in-depth guides on Django and web development!
+          </p>
+      </div>
+      <div class="md:w-1/2 text-center md:pl-10 mt-10 md:mt-0">
+          <img src="{% static 'images/me.jpg' %}" alt="Moataz Fawzy"
+              class="rounded-full w-48 h-48 mx-auto animate__animated animate__bounce">
+      </div>
+  </div>
+</div>
+
+
+   
+
+   <!-- Social Media and YouTube Links -->
+   <div class="mt-16 text-center">
+    <h3 class="text-2xl font-semibold text-gray-800 mb-8">Connect with Me</h3>
+    <div class="flex justify-center space-x-8">
+        <!-- YouTube -->
+        <a href="https://www.youtube.com/@djangoforall" target="_blank"
+            class="hover:opacity-75 transition duration-200">
+            <img class="h-10 w-10"
+                src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png"
+                alt="YouTube">
+        </a>
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/mezo_5102/" target="_blank"
+            class="hover:opacity-75 transition duration-200">
+            <img class="h-10 w-10" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+                alt="Instagram">
+        </a>
+        <!-- X (Twitter) -->
+        <a href="https://x.com/Mezo0345" target="_blank"
+            class="hover:opacity-75 transition duration-200">
+            <img class="h-10 w-10" src="{% static 'images/download.jpeg' %}"
+                alt="X">
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/moataz-fawzy-backend/" target="_blank"
+            class="hover:opacity-75 transition duration-200">
+            <img class="h-10 w-10"
+                src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
+        </a>
+        <!-- GitHub -->
+        <a href="https://github.com/Moataz0000" target="_blank" class="hover:opacity-75 transition duration-200">
+            <img class="h-10 w-10"
+                src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub">
+        </a>
+    </div>
+</div>
+
+  </div>
+</div>
+{% endblock content %}

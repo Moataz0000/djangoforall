@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    {{ project.title }} | Portfolio | Django For All
+{% endblock title %}
+
+{% block content %}
+<div class="bg-gray-100 py-12">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            
+            <!-- Main Project Image -->
+            <img src="{{ project.main_image.url }}" alt="{{ project.title }}" class="w-full h-auto object-cover project-image animate-fade-in" style="cursor: pointer;">
+            
+            <!-- Project Content -->
+            <div class="p-6">
+                <h2 class="text-4xl font-extrabold text-gray-800">{{ project.title }}</h2>
+                <p class="mt-4 text-gray-600">{{ project.description|safe }}</p>
+
+                <!-- Project Links -->
+                <div class="mt-6 flex space-x-4">
+                    <a href="{{ project.github_url }}" target="_blank" class="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition duration-300">View on GitHub</a>
+                    
+                    {% if project.deploy_url %}
+                        <a href="{{ project.deploy_url }}" target="_blank" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-400 transition duration-300">View Live</a>
+                    {% endif %}
+                </div>
+
+                <!-- Additional Project Images -->
+                {% if project.images.all %}
+                <div class="mt-8">
+                    <h3 class="text-2xl font-bold text-gray-800">Project Images</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                        {% for image in project.images.all %}
+                        <img src="{{ image.image.url }}" alt="{{ project.title }}" class="w-full h-auto object-cover rounded-lg shadow-md project-image animate-fade-in" style="cursor: pointer;">
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Image Preview -->
+<div id="imageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 flex justify-center items-center">
+    <button id="prevButton" class="absolute left-4 text-white text-3xl bg-gray-800 px-4 py-2 rounded-full hover:bg-gray-700 transition duration-300">&lt;</button>
+    <img id="modalImage" src="" alt="Project Image" class="max-w-full max-h-full object-contain">
+    <button id="nextButton" class="absolute right-4 text-white text-3xl bg-gray-800 px-4 py-2 rounded-full hover:bg-gray-700 transition duration-300">&gt;</button>
+    <button id="closeModal" class="absolute top-4 right-4 text-white text-3xl">&times;</button>
+</div>
+
+<script>
+    // Function to initialize modal functionality
+    function initModal() {
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeModal = document.getElementById('closeModal');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+
+        const projectImages = document.querySelectorAll('.project-image');
+        let currentIndex = 0;
+
+        function openModal(imageUrl, index) {
+            modalImage.src = imageUrl;
+            currentIndex = index;
+            modal.classList.remove('hidden');
+        }
+
+        projectImages.forEach((image, index) => {
+            image.addEventListener('click', function() {
+                openModal(this.src, index);
+            });
+        });
+
+        closeModal.addEventListener('click', function() {
+            modal.classList.add('hidden');
+        });
+
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.classList.add('hidden');
+            }
+        });
+
+        function updateImage() {
+            modalImage.src = projectImages[currentIndex].src; // Change image
+        }
+
+        prevButton.addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevent modal close on button click
+            currentIndex = (currentIndex - 1 + projectImages.length) % projectImages.length;
+            updateImage();
+        });
+
+        nextButton.addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevent modal close on button click
+            currentIndex = (currentIndex + 1) % projectImages.length;
+            updateImage();
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initModal);
+</script>
+
+<style>
+    /* Animation for fade in effect */
+    .animate-fade-in {
+        animation: fadeIn 0.5s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Adjust image styles for responsiveness */
+    img {
+        max-width: 100%; /* Ensure images do not exceed their container */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    /* Hover effect for images */
+    .project-image {
+        transition: transform 0.3s ease; /* Smooth transition for scale */
+    }
+
+    .project-image:hover {
+        transform: scale(1.05); /* Scale up the image on hover */
+    }
+
+    /* Styles for modal buttons */
+    button {
+        border: none;
+        outline: none;
+        cursor: pointer;
+        width: 48px; /* Set a fixed width for the buttons */
+        height: 48px; /* Set a fixed height for the buttons */
+        border-radius: 50%; /* Make buttons round */
+        display: flex; /* Center align text inside */
+        justify-content: center; /* Center align text inside */
+        align-items: center; /* Center align text inside */
+        font-size: 24px; /* Increase font size for better visibility */
+    }
+</style>
+
+{% endblock content %}

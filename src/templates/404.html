@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}
+    Page Not Found | Django for All
+{% endblock title %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 flex items-center justify-center">
+  <div class="text-center">
+    <h1 class="text-6xl font-bold text-gray-800">404 🚫</h1>
+    <p class="mt-4 text-xl text-gray-600">Oops! The page you're looking for doesn't exist. 🤔</p>
+    <p class="mt-2 text-lg text-gray-500">It might have been removed or you might have entered the wrong URL.</p>
+    <a href="/" class="mt-6 inline-block bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-200">
+      Go back to Home 🏠
+    </a>
+  </div>
+</div>
+{% endblock content %}

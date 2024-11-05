@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% load tz %}
+{% load blog_tags %}
+
+{% block content %}
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto py-8">
+
+    <!-- Left Column (Post Content) -->
+    <div class="col-span-2 space-y-8">
+
+        <!-- Post Section -->
+        <div class="bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+            <img class="rounded-t-lg w-full" src="{{ post_detail.image.url }}" alt="{{ post_detail.title }}" />
+            <div class="p-5">
+                <h1 class="mb-4 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">{{ post_detail.title }}</h1>
+                <p class="mb-3 text-sm text-gray-600 dark:text-gray-400 flex items-center">
+                    <svg class="w-4 h-4 mr-1 text-gray-600 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 2a10 10 0 100 20 10 10 0 000-20z" />
+                    </svg>
+                    {% timezone "Africa/Cairo" %}
+                    {{ post_detail.created|date:"F j, Y, g:i a" }}
+                    {% endtimezone %}
+                </p>
+                <p class="mb-3 text-sm text-gray-600 dark:text-gray-400">
+                    <span class="font-medium">Write-By: {{ post_detail.author }}</span>
+                </p>
+                <p class="mb-6 font-normal text-gray-700 dark:text-gray-400">{{ post_detail.content|safe }}</p>
+                
+            </div>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="bg-white border border-gray-200 rounded-lg p-6 dark:bg-gray-800 dark:border-gray-700">
+            <h2 class="text-2xl font-bold mb-4">Comments</h2>
+            {% with comments.count as total_comments %}
+            <p class="text-sm text-gray-500">{{ total_comments }} comment{{ total_comments|pluralize }}</p>
+            {% endwith %}
+            <div id="comments-container">
+                {% for comment in comments %}
+                <div
+                    class="comment-item mb-6 p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-sm {% if forloop.counter > 5 %}hidden{% endif %}">
+                    <div class="mb-2 flex items-center">
+                        <a href="{% url 'accounts:profile' comment.user.username %}" class="flex items-center">
+                            <img src="{{ comment.user.profile.photo.url }}" alt="{{ comment.user.username }}'s profile picture" class="h-8 w-8 rounded-full mr-2">  <!-- Small profile image -->
+                            <span class="font-semibold text-gray-900">{{ comment.user.username }}</span>
+                        </a> 
+                        <span class="text-sm text-gray-500 ml-2">
+                            {% timezone "Africa/Cairo" %}
+                            {{ comment.created|date:"F j, Y, g:i a" }}
+                            {% endtimezone %}
+                        </span>
+                    </div>
+                    
+                    <p class="text-gray-700">{{ comment.body|linebreaks }}</p>
+                </div>
+                {% empty %}
+                <div class="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+                    <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                    </svg>
+                    <span class="sr-only">Info</span>
+                    <div>
+                      <span class="font-medium"><p>There are no comments yet. Be the first to leave a comment!</p></span>                 
+                    </div>
+                  </div>
+                {% endfor %}
+            </div>
+            {% if comments.count > 5 %}
+            <button href="#" id="show-more-comments"
+                class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-semibold me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400 inline-flex items-center justify-center">
+                More comments...
+            </button>
+            {% endif %}
+            <h3 class="text-xl font-bold mt-6">Leave a Comment</h3>
+            <form class="mt-4" action="{% url 'blog:post_comment' post_detail.slug %}" method="post">
+                <div class="mb-4">
+                    <label for="comment" class="block mb-2 text-sm font-medium text-gray-700">Your Comment</label>
+                    {{ form.body }}
+                    {% csrf_token %}
+                </div>
+                {% if user.is_authenticated %}
+                <button type="submit"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Comment
+                </button>
+                {% else %}
+                <a href="{% url 'accounts:login' %}"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Login to comment
+                </a>
+                {% endif %}
+            </form>
+        </div>
+
+    </div>
+
+    <!-- Right Column (Tags and Related Posts) -->
+    <div class="col-span-1 space-y-8">
+
+        <!-- Tags Section -->
+        <div class="bg-white border border-gray-200 rounded-lg p-6 dark:bg-gray-800 dark:border-gray-700">
+            <h2 class="text-2xl font-bold mb-4">Tags</h2>
+            <div class="flex flex-wrap gap-2">
+                {% for tag in post_detail.tags.all %}
+                <a href="{% url 'blog:post_list_by_tag' tag.slug %}">
+                    <span
+                        class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">{{ tag.name }}</span>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+<!-- Related Posts Section -->
+<div class="bg-white border border-gray-200 rounded-lg p-6 dark:bg-gray-800 dark:border-gray-700">
+    <h2 class="text-2xl font-bold mb-4">Related Posts</h2>
+    <ul class="list-disc list-inside space-y-2">
+        {% for related_post in related_posts %}
+        <li class="flex items-center">
+            <a href="{{ related_post.get_post_url }}" class="text-blue-600 hover:underline transition-colors duration-200 ease-in-out">{{ related_post.title }}</a>
+        </li>
+        {% empty %}
+        <li>
+            <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+                <span class="font-medium">There are no similar posts yet.</span>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const showMoreButton = document.getElementById("show-more-comments");
+        const hiddenComments = document.querySelectorAll(".comment-item.hidden");
+        if (showMoreButton) {
+            showMoreButton.addEventListener("click", function () {
+                hiddenComments.forEach(comment => {
+                    comment.classList.remove("hidden");
+                });
+                showMoreButton.style.display = "none";
+            });
+        }
+    });
+</script>
+
+{% endblock content %}

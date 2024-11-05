@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load tailwind_filters %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+    Services | Django for All
+{% endblock title %}
+
+{% block content %}
+<div class="bg-white py-16 px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center">
+      <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">My Services</h2>
+      <p class="mt-4 text-lg leading-6 text-gray-600">
+        I offer a range of web development services to help bring your ideas to life.
+      </p>
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+   <!-- Service 1 -->
+<div class="border rounded-lg p-6 shadow-md hover:shadow-lg transition-all transform hover:scale-105">
+  <h3 class="text-xl font-bold text-gray-800">Web Development</h3>
+  <p class="mt-2 text-gray-600">
+    Custom web development using Django and Tailwind CSS to create responsive and user-friendly websites.
+  </p>
+</div>
+
+<!-- Service 2 -->
+<div class="border rounded-lg p-6 shadow-md hover:shadow-lg transition-all transform hover:scale-105">
+  <h3 class="text-xl font-bold text-gray-800">E-commerce Solutions</h3>
+  <p class="mt-2 text-gray-600">
+    Building powerful e-commerce platforms tailored to your business needs with secure payment integration and PostgreSQL for efficient data management.
+  </p>
+</div>
+
+<!-- Service 3 -->
+<div class="border rounded-lg p-6 shadow-md hover:shadow-lg transition-all transform hover:scale-105">
+  <h3 class="text-xl font-bold text-gray-800">API Development</h3>
+  <p class="mt-2 text-gray-600">
+    Developing RESTful APIs using Django Rest Framework and PostgreSQL to enhance the functionality and scalability of your applications.
+  </p>
+</div>
+
+<!-- Service 4 -->
+<div class="border rounded-lg p-6 shadow-md hover:shadow-lg transition-all transform hover:scale-105">
+  <h3 class="text-xl font-bold text-gray-800">Database Optimization</h3>
+  <p class="mt-2 text-gray-600">
+    Optimizing PostgreSQL databases for high performance, efficient querying, and improved website or application speed.
+  </p>
+</div>
+
+<!-- Service 5 -->
+<div class="border rounded-lg p-6 shadow-md hover:shadow-lg transition-all transform hover:scale-105">
+  <h3 class="text-xl font-bold text-gray-800">Content Management Systems (CMS)</h3>
+  <p class="mt-2 text-gray-600">
+    Providing CMS solutions for easy content updates and management using Django, ensuring your site remains fresh and relevant.
+  </p>
+</div>
+
+<!-- Service 6 -->
+<div class="border rounded-lg p-6 shadow-md hover:shadow-lg transition-all transform hover:scale-105">
+  <h3 class="text-xl font-bold text-gray-800">Consultation & Support</h3>
+  <p class="mt-2 text-gray-600">
+    Offering consultation to help you strategize, troubleshoot, and optimize your Django and PostgreSQL projects for better results.
+  </p>
+</div>
+
+      </div>
+
+    
+
+    <!-- Service Request Form -->
+    <div class="mt-16">
+      {% include "parts/alerts.html" %}
+
+        <h2 class="text-2xl font-bold text-gray-900 text-center">Request a Service</h2>
+        <p class="mt-4 text-lg leading-6 text-gray-600 text-center">
+          Fill out the form below to request a service or get in touch with me!
+        </p>
+        <form method="post" action="" enctype="multipart/form-data" class="bg-white rounded-lg shadow-md p-8 mt-8">
+          {% csrf_token %}
+          
+          {{ form|crispy }}
+
+          <div class="mt-6">
+            <button type="submit" class="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+              Order
+            </button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+[
+  {
+      "model": "blog.post",
+      "pk": 1,
+      "fields": {
+          "title": "Introduction to Django",
+          "slug": "introduction-to-django",
+          "author": 1,
+          "image": "no_picture.jpg",
+          "content": "This post introduces Django, a powerful web framework for building web applications with Python.",
+          "created": "2024-10-21T10:00:00Z",
+          "updated": "2024-10-21T10:00:00Z",
+          "active": true,
+          "tags": ["Django", "Python"]  
+      }
+  },
+  {
+      "model": "blog.post",
+      "pk": 2,
+      "fields": {
+          "title": "Setting Up PostgreSQL with Django",
+          "slug": "setting-up-postgresql-with-django",
+          "author": 1,
+          "image": "no_picture.jpg",
+          "content": "Learn how to configure PostgreSQL as the database for your Django project.",
+          "created": "2024-10-21T10:05:00Z",
+          "updated": "2024-10-21T10:05:00Z",
+          "active": true,
+          "tags": ["Django", "Web Development"]  
+      }
+  }
+]
